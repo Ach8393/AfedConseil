@@ -47,7 +47,7 @@ const ShowcaseSection = () => {
             {/* LEFT */}
                 <div className='first-project-wrapper' ref={project1Ref}>
                     <div className='image-wrapper'>
-                        <img src='/images/project1.png' alt='Ryde' />
+                        <img src='AfedConseil/images/project1.png' alt='Ryde' />
                     </div>
                     <div className='text-content'>
                         <h2> Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
@@ -63,13 +63,13 @@ const ShowcaseSection = () => {
                 <div className='project-list-wrapper overflow-hidden'>
                     <div className='project' ref={project2Ref}>
                         <div className='image-wrapper bg-[#ffefdb]'>
-                            <img src='/images/project2.png' alt='Library Management' />
+                            <img src='AfedConseil/images/project2.png' alt='Library Management' />
                         </div>
                         <h2>Bootcamp Spark Lab Panel</h2>
                     </div>
                     <div className='project' ref={project3Ref}>
                         <div className='image-wrapper bg-[#ffe7eb]'>
-                            <img src='/images/project3.png' alt='YC Directory' />
+                            <img src='AfedConseil/images/project3.png' alt='YC Directory' />
                         </div>
                         <h2>Bootcamp Spark Lab Ateliers</h2>
                     </div>

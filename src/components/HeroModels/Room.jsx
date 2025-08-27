@@ -5,8 +5,8 @@ import { useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function Room(props) {
-  const matcapTexture = useTexture('/images/afed.png');
-  const { nodes, materials } = useGLTF('/models/compressed_office_desk.glb')
+  const matcapTexture = useTexture('AfedConseil/images/afed.png');
+  const { nodes, materials } = useGLTF('AfedConseil/models/compressed_office_desk.glb')
   const bodyMaterial = new THREE.MeshPhongMaterial({ matcap: matcapTexture });
  
   return (
@@ -64,4 +64,4 @@ export function Room(props) {
   )
 }
 
-useGLTF.preload('/models/compressed_office_desk.glb')
+useGLTF.preload('AfedConseil/models/compressed_office_desk.glb')
