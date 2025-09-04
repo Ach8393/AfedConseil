@@ -18,15 +18,19 @@ const navLinks = [
 ];
 
 const words = [
-  { text: "Accompagnement", imgPath: "AfedConseil/images/ideas.svg" },
-  { text: "Apprentissage", imgPath: "AfedConseil/images/concepts.svg" },
-  { text: "Formation", imgPath: "AfedConseil/images/designs.svg" },
-  { text: "Formule Adaptés", imgPath: "AfedConseil/images/ideas.svg" },
-  { text: "Etude", imgPath: "AfedConseil/images/concepts.svg" },
-  { text: "Efficacité", imgPath: "AfedConseil/images/designs.svg" },
-   { text: "Developpement", imgPath: "AfedConseil/images/ideas.svg" },
-    { text: "Durabilité", imgPath: "AfedConseil/images/ideas.svg" },
+  { text: "Accompagnement", imgPath: "AfedConseil/images/accompagnement.svg" },
+  { text: "Apprentissage", imgPath: "AfedConseil/images/learning.svg" },
+  { text: "Formation", imgPath: "AfedConseil/images/formation.svg" },
+  { text: "Formule Adaptés", imgPath: "AfedConseil/images/formule.svg" },
+  { text: "Etude", imgPath: "AfedConseil/images/etude.svg" },
+  { text: "Efficacité", imgPath: "AfedConseil/images/efficiency.svg" },
+   { text: "Developpement", imgPath: "AfedConseil/images/growth.svg" },
+    { text: "Durabilité", imgPath: "AfedConseil/images/durabilty.svg" },
   
+];
+
+const logoImgs = [
+  { imgPath: "AfedConseil/images/afedC.jpg" },
 ];
 
 const counterItems = [
@@ -93,23 +97,23 @@ const abilities = [
 const techStackImgs = [
   {
     name: "Formation",
-    imgPath: "AfedConseil/images/logos/react.png",
+    imgPath: "AfedConseil/images/logos/formation.png",
   },
   {
     name: "Animation",
-    imgPath: "AfedConseil/images/logos/python.svg",
+    imgPath: "AfedConseil/images/logos/animation.png",
   },
   {
     name: "Marketing",
-    imgPath: "AfedConseil/images/logos/node.png",
+    imgPath: "AfedConseil/images/logos/marketing.svg",
   },
   {
     name: "Conseil",
-    imgPath: "AfedConseil/images/logos/three.png",
+    imgPath: "AfedConseil/images/logos/conseil.png",
   },
   {
     name: "Gestion de Projet",
-    imgPath: "AfedConseil/images/logos/git.svg",
+    imgPath: "AfedConseil/images/logos/gestion.png",
   },
 ];
 
@@ -171,16 +175,27 @@ const expCards = [
       "Mettre en place un dispositif de suivi-évaluation assurant l’efficacité, la transparence et l’amélioration continue",
     ],
   },
-  {
-    review: "la compétition des idées de projets – SPARK LAB",
-    imgPath: "AfedConseil/images/exp3.png",
-    logoPath: "AfedConseil/images/logo3.png",
-    title: "SPARK LAB",
-    date: "May 2025",
+    {
+    review: "Dans le cadre du projet Laboratoire d'Innovation organisé par l'association Act4Community Khouribga en partenariat avec la Direction provinciale du Ministère de l'Éducation Nationale, du Préscolaire et des Sports de Khouribga, et géré par AFED Conseil, les équipes gagnantes de la compétition entre les établissements ciblés par le projet ont participé au Challenge Robotique organisé par le Centre Play & Code Academy à Casablanca, aux côtés d'équipes de diverses institutions éducatives de la ville de Casablanca.",
+    imgPath: "AfedConseil/images/exp1.png",
+    logoPath: "AfedConseil/images/logo1.png",
+    title: "Qualification des Entraîneurs d’Éducation Physique et Sportive ",
+    date: "Juillet 2025 ",
     responsibilities: [
-      "24 équipes de lycéennes et lycéens issus de cinq lycées partenaires du projet Spark Lab",
-      "3 projets portés par des étudiants de la Faculté Polydisciplinaire de Khouribga (FPK)",
-      "3 projets développés par des stagiaires du Centre de Renforcement des Capacités des Femmes",
+      "Les équipes du Collège Moulay Rachid ont brillamment remporté la deuxième et la troisième place, tandis que la première place a été décernée à l'équipe du Collège Al-Kindi de Casablanca.",
+      "Après des moments de compétition intense, une visite à la Mosquée Hassan II a été organisée pour les participants, leur offrant une expérience enrichissante et mémorable.",
+    ],
+  },
+  {
+    review: "Dans le cadre du projet Engagement et Intégration : La Démocratie Participative et le Droit à l'Information comme Leviers du Développement, financé par USAID-MOROCCO et porté par l'Association Nour pour le Développement et la Solidarité, AFED Conseil a animé des ateliers pour les associations de la société civile d'Abi Jâad.",
+    imgPath: "AfedConseil/images/afedC.png",
+    logoPath: "AfedConseil/images/afeed.png",
+    title: "ISED-BMK",
+    date: "Decembre 2024",
+    responsibilities: [
+      "Les formations, organisées les 30 décembre 2024 et 18 janvier 2025, ont abordé les sujets suivants :",
+      "La gestion financière des associations",
+      "La gestion administrative des associations",
     ],
   },
 ];
@@ -267,6 +282,7 @@ const socialImgs = [
 export {
   words,
   abilities,
+  logoImgs,
   logoIconsList,
   counterItems,
   expCards,

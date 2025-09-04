@@ -3,6 +3,7 @@ import gsap from "gsap";
 import TitleHeader from '../components/TitleHeader'
 import { techStackIcons } from '../constants'
 import Techicon from '../components/Models/TechLogos/Techicon'
+import { techStackImgs } from "../constants"
 
 const TechStack = () => {
 
@@ -41,7 +42,7 @@ const TechStack = () => {
                 sub="💻 Nos" 
             />
             <div className='tech-grid'>
-                {techStackIcons.map((icon) => (
+                {/*{techStackIcons.map((icon) => (
                     <div key={icon.name} className='card-border tech-card overflow-hidden group xl:rounded-full rounded-lg'>
                         <div className='tech-card-animated-bg' />
                         <div className='tech-card-content'>
@@ -53,7 +54,24 @@ const TechStack = () => {
                             </div>
                         </div>
                     </div>
-                ))}
+                ))}*/}
+                  {techStackImgs.map((techStackIcons, index) => (
+            <div
+              key={index}
+              className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg"
+            >
+              <div className="tech-card-animated-bg" />
+              <div className="tech-card-content">
+                <div className="tech-icon-wrapper">
+                  <img src={techStackIcons.imgPath} alt="" />
+                </div>
+                <div className="padding-x w-full">
+                  <p>{techStackIcons.name}</p>
+                </div>
+              </div>
+            </div>
+          ))} 
+
             </div>
         </div>
       

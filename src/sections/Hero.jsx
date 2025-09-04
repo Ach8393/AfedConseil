@@ -5,6 +5,7 @@ import HeroExperience from '../components/HeroModels/HeroExperience'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import AnimatedCounter from '../components/AnimatedCounter'
+import { logoImgs } from '../constants'
 
 const Hero = () => {
   useGSAP(() => {
@@ -34,7 +35,7 @@ const Hero = () => {
             <header className='flex flex-col justify-center md:w-full w-screen md:px-20 px-5'>
                 <div className='flex flex-col gap-7'>
                     <div className='hero-text'>
-                        <h1>AFED
+                        <h1 className='text-blue-400'>AFED
                             <span className='slide'>
                               <span className='wrapper'>
                                 {words.map((word) => (
@@ -44,7 +45,7 @@ const Hero = () => {
                                           alt={word.text}
                                           className='xl/size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50'
                                         />
-                                        <span>
+                                        <span className='text-white'>
                                             {word.text}
                                         </span>
                                     </span>
@@ -67,7 +68,10 @@ const Hero = () => {
                      />
                 </div>
             </header>
-            {/* right: 3d model */ }
+            {/* right: 3d model <div className='card-border tech-card overflow-hidden group'>
+              <img src='AfedConseil/images/afedC.png' alt="" />
+            </div> */ }
+            
             <figure>
               <div className='hero-3d-layout'>
                 <HeroExperience />
