@@ -153,7 +153,7 @@ const techStackIcons = [
 const expCards = [
   {
     review: "Porté par Act4Community Khouribga | Piloté par AFED Conseil dans le cadre de notre mission de former une nouvelle génération d’éducateurs sportifs compétents, engagés et pédagogues.",
-    imgPath: /images/exp1.png",
+    imgPath: "/images/exp1.png",
     logoPath: "/images/logo1.png",
     title: "Qualification des Entraîneurs d’Éducation Physique et Sportive ",
     date: "Juillet 2025 ",
