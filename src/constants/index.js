@@ -149,7 +149,7 @@ const techStackIcons = [
     rotation: [0, -Math.PI / 4, 0],
   },
 ];
-
+/* articles should be fetched from db */
 const expCards = [
   {
     review: "Porté par Act4Community Khouribga | Piloté par AFED Conseil dans le cadre de notre mission de former une nouvelle génération d’éducateurs sportifs compétents, engagés et pédagogues.",
@@ -203,7 +203,7 @@ const expLogos = [
     imgPath: "AfedConseil/images/logo3.png",
   },
 ];
-
+/* reviews should be fetched from db */
 const testimonials = [
   {
     name: "Esther Howard",

@@ -1,92 +1,84 @@
+import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { expCards } from "../constants";
+import API from "../constants/api"; // Ton instance Axios
 import TitleHeader from "../components/TitleHeader";
 import GlowCard from "../components/GlowCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ExperienceSection = () => {
- useGSAP(() => {
-    // Loop through each timeline card and animate them in
-    // as the user scrolls to each card
-    gsap.utils.toArray(".timeline-card").forEach((card) => {
-      // Animate the card coming in from the left
-      // and fade in
+  const [expCards, setExpCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // 1. Récupération des données
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const response = await API.get("/articles");
+        setExpCards(response.data.data);
+      } catch (error) {
+        console.error("Erreur API:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchArticles();
+  }, []);
+
+  // 2. Animations GSAP (déclenchées seulement quand expCards change)
+  useGSAP(() => {
+    if (expCards.length === 0) return;
+
+    // Animation des cartes (timeline-card ou exp-card-wrapper selon ton CSS)
+    gsap.utils.toArray(".exp-card-wrapper").forEach((card) => {
       gsap.from(card, {
-        // Move the card in from the left
         xPercent: -100,
-        // Make the card invisible at the start
         opacity: 0,
-        // Set the origin of the animation to the left side of the card
         transformOrigin: "left left",
-        // Animate over 1 second
         duration: 1,
-        // Use a power2 ease-in-out curve
         ease: "power2.inOut",
-        // Trigger the animation when the card is 80% of the way down the screen
         scrollTrigger: {
-          // The card is the trigger element
           trigger: card,
-          // Trigger the animation when the card is 80% down the screen
           start: "top 80%",
         },
       });
     });
 
-    // Animate the timeline height as the user scrolls
-    // from the top of the timeline to 70% down the screen
-    // The timeline height should scale down from 1 to 0
-    // as the user scrolls up the screen
+    // Animation de la ligne de temps (Height)
     gsap.to(".timeline", {
-      // Set the origin of the animation to the bottom of the timeline
       transformOrigin: "bottom bottom",
-      // Animate the timeline height over 1 second
       ease: "power1.inOut",
-      // Trigger the animation when the timeline is at the top of the screen
-      // and end it when the timeline is at 70% down the screen
       scrollTrigger: {
         trigger: ".timeline",
         start: "top center",
         end: "70% center",
-        // Update the animation as the user scrolls
         onUpdate: (self) => {
-          // Scale the timeline height as the user scrolls
-          // from 1 to 0 as the user scrolls up the screen
           gsap.to(".timeline", {
             scaleY: 1 - self.progress,
+            overwrite: "auto", 
           });
         },
       },
     });
 
-    // Loop through each expText element and animate them in
-    // as the user scrolls to each text element
+    // Animation du texte
     gsap.utils.toArray(".expText").forEach((text) => {
-      // Animate the text opacity from 0 to 1
-      // and move it from the left to its final position
-      // over 1 second with a power2 ease-in-out curve
       gsap.from(text, {
-        // Set the opacity of the text to 0
         opacity: 0,
-        // Move the text from the left to its final position
-        // (xPercent: 0 means the text is at its final position)
         xPercent: 0,
-        // Animate over 1 second
         duration: 1,
-        // Use a power2 ease-in-out curve
         ease: "power2.inOut",
-        // Trigger the animation when the text is 60% down the screen
         scrollTrigger: {
-          // The text is the trigger element
           trigger: text,
-          // Trigger the animation when the text is 60% down the screen
           start: "top 60%",
         },
       });
-    }, "<"); // position parameter - insert at the start of the animation
-  }, []);
+    });
+  }, { dependencies: [expCards], revertOnUpdate: true }); // Important pour recalculer après le fetch
+
+  if (loading) return null; // Ou un loader discret pour éviter le saut visuel
 
   return (
     <section
@@ -101,7 +93,7 @@ const ExperienceSection = () => {
         <div className="mt-32 relative">
           <div className="relative z-50 xl:space-y-32 space-y-10">
             {expCards.map((card) => (
-              <div key={card.title} className="exp-card-wrapper">
+              <div key={card._id || card.title} className="exp-card-wrapper">
                 <div className="xl:w-2/6">
                   <GlowCard card={card}>
                     <div>
@@ -124,17 +116,13 @@ const ExperienceSection = () => {
                         <p className="my-5 text-white-50">
                           🗓️&nbsp;{card.date}
                         </p>
-                        <p className="text-[#839CB5] italic">
-                          Resumé:
-                        </p>
+                        <p className="text-[#839CB5] italic">Resumé:</p>
                         <ul className="list-disc ms-5 mt-5 flex flex-col gap-5 text-white-50">
-                          {card.responsibilities.map(
-                            (responsibility, index) => (
-                              <li key={index} className="text-lg">
-                                {responsibility}
-                              </li>
-                            )
-                          )}
+                          {card.responsibilities.map((responsibility, index) => (
+                            <li key={index} className="text-lg">
+                              {responsibility}
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     </div>
@@ -148,4 +136,5 @@ const ExperienceSection = () => {
     </section>
   );
 };
-export default ExperienceSection
+
+export default ExperienceSection;
