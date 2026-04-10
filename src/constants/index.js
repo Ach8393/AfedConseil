@@ -18,14 +18,14 @@ const navLinks = [
 ];
 
 const words = [
-  { text: "Accompagnement", imgPath: "images/ideas.svg" },
+  { text: "Accompagnement", imgPath: "images/accompagnement.svg" },
   { text: "Apprentissage", imgPath: "images/concepts.svg" },
-  { text: "Formation", imgPath: "images/designs.svg" },
-  { text: "Formule Adaptés", imgPath: "images/ideas.svg" },
-  { text: "Etude", imgPath: "images/concepts.svg" },
-  { text: "Efficacité", imgPath: "images/designs.svg" },
-   { text: "Developpement", imgPath: "images/ideas.svg" },
-    { text: "Durabilité", imgPath: "images/ideas.svg" },
+  { text: "Formation", imgPath: "images/formation.svg" },
+  { text: "Formule Adaptés", imgPath: "images/formule.svg" },
+  { text: "Etude", imgPath: "images/etude.svg" },
+  { text: "Efficacité", imgPath: "images/efficiency.svg" },
+   { text: "Developpement", imgPath: "images/growth.svg" },
+    { text: "Durabilité", imgPath: "images/durabilty.svg" },
   
 ];
 
@@ -101,19 +101,19 @@ const techStackImgs = [
   },
   {
     name: "Animation",
-    imgPath: "images/logos/python.svg",
+    imgPath: "images/logos/animation.png",
   },
   {
     name: "Marketing",
-    imgPath: "images/logos/node.png",
+    imgPath: "images/logos/marketing.png",
   },
   {
     name: "Conseil",
-    imgPath: "images/logos/three.png",
+    imgPath: "images/logos/conseil.png",
   },
   {
     name: "Gestion de Projet",
-    imgPath: "images/logos/git.svg",
+    imgPath: "images/logos/gestion.png",
   },
 ];
 
