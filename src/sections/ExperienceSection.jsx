@@ -11,21 +11,15 @@ gsap.registerPlugin(ScrollTrigger);
 const ExperienceSection = () => {
   const [expCards, setExpCards] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [galleryPhotos, setGalleryPhotos] = useState([]);
-  const [showGallery, setShowGallery] = useState(false);
 
-  // 1. Récupération des données
+  // 1. Récupération des données uniquement pour les articles/expériences
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [artRes, galRes] = await Promise.all([
-          API.get("/articles"),
-          API.get("/gallery")
-        ]);
-        setExpCards(artRes.data.data);
-        setGalleryPhotos(galRes.data.data);
+        const res = await API.get("/articles");
+        setExpCards(res.data.data);
       } catch (error) {
-        console.error("Erreur API:", error);
+        console.error("Erreur API Articles:", error);
       } finally {
         setLoading(false);
       }
@@ -33,11 +27,11 @@ const ExperienceSection = () => {
     fetchData();
   }, []);
 
-  // 2. Animations GSAP (déclenchées seulement quand expCards change)
+  // 2. Animations GSAP
   useGSAP(() => {
     if (expCards.length === 0) return;
 
-    // Animation des cartes (timeline-card ou exp-card-wrapper selon ton CSS)
+    // Animation des cartes
     gsap.utils.toArray(".exp-card-wrapper").forEach((card) => {
       gsap.from(card, {
         xPercent: -100,
@@ -52,7 +46,7 @@ const ExperienceSection = () => {
       });
     });
 
-    // Animation de la ligne de temps (Height)
+    // Animation de la ligne de temps
     gsap.to(".timeline", {
       transformOrigin: "bottom bottom",
       ease: "power1.inOut",
@@ -82,9 +76,9 @@ const ExperienceSection = () => {
         },
       });
     });
-  }, { dependencies: [expCards], revertOnUpdate: true }); // Important pour recalculer après le fetch
+  }, { dependencies: [expCards], revertOnUpdate: true });
 
-  if (loading) return null; // Ou un loader discret pour éviter le saut visuel
+  if (loading) return null;
 
   return (
     <section
@@ -96,39 +90,6 @@ const ExperienceSection = () => {
           title="Expérience professionnelle"
           sub="💼 Aperçu de ma carrière"
         />
-        {/* BOUTON TOGGLE GALERIE */}
-        <div className="flex justify-center mt-10">
-          <button 
-            onClick={() => setShowGallery(!showGallery)}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
-          >
-            {showGallery ? "📁 Cacher la Galerie" : "🖼️ Voir la Galerie Photos"}
-          </button>
-        </div>
-
-        {/* SECTION GALERIE (Conditionnelle) */}
-        {showGallery && (
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 p-5 bg-black/20 rounded-3xl backdrop-blur-sm border border-white/10">
-            {galleryPhotos.length > 0 ? (
-              galleryPhotos.map((photo) => (
-                <div key={photo._id} className="group relative overflow-hidden rounded-xl h-48">
-                  <img 
-                    src={photo.imgPath} 
-                    alt={photo.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  {photo.title && (
-                    <div className="absolute bottom-0 inset-x-0 bg-black/60 p-2 text-xs text-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      {photo.title}
-                    </div>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p className="col-span-full text-center py-10 italic text-gray-400">La galerie est vide pour le moment...</p>
-            )}
-          </div>
-        )}
         
         <div className="mt-32 relative">
           <div className="relative z-50 xl:space-y-32 space-y-10">
@@ -137,7 +98,12 @@ const ExperienceSection = () => {
                 <div className="xl:w-2/6">
                   <GlowCard card={card}>
                     <div>
-                      <img src={card.imgPath} alt="exp-img" />
+                      {/* Optimisation Cloudinary appliquée à la volée */}
+                      <img 
+                        src={card.imgPath ? card.imgPath.replace('/upload/', '/upload/f_auto,q_auto/') : ''} 
+                        alt="exp-img" 
+                        loading="lazy"
+                      />
                     </div>
                   </GlowCard>
                 </div>
@@ -149,7 +115,11 @@ const ExperienceSection = () => {
                     </div>
                     <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-20">
                       <div className="timeline-logo">
-                        <img src={card.logoPath} alt="logo" />
+                        <img 
+                          src={card.logoPath ? card.logoPath.replace('/upload/', '/upload/f_auto,q_auto/') : ''} 
+                          alt="logo" 
+                          loading="lazy"
+                        />
                       </div>
                       <div>
                         <h1 className="font-semibold text-3xl">{card.title}</h1>
