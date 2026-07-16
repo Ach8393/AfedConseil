@@ -11,20 +11,26 @@ gsap.registerPlugin(ScrollTrigger);
 const ExperienceSection = () => {
   const [expCards, setExpCards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [galleryPhotos, setGalleryPhotos] = useState([]);
+  const [showGallery, setShowGallery] = useState(false);
 
   // 1. Récupération des données
   useEffect(() => {
-    const fetchArticles = async () => {
+    const fetchData = async () => {
       try {
-        const response = await API.get("/articles");
-        setExpCards(response.data.data);
+        const [artRes, galRes] = await Promise.all([
+          API.get("/articles"),
+          API.get("/gallery")
+        ]);
+        setExpCards(artRes.data.data);
+        setGalleryPhotos(galRes.data.data);
       } catch (error) {
         console.error("Erreur API:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchArticles();
+    fetchData();
   }, []);
 
   // 2. Animations GSAP (déclenchées seulement quand expCards change)
@@ -90,6 +96,40 @@ const ExperienceSection = () => {
           title="Expérience professionnelle"
           sub="💼 Aperçu de ma carrière"
         />
+        {/* BOUTON TOGGLE GALERIE */}
+        <div className="flex justify-center mt-10">
+          <button 
+            onClick={() => setShowGallery(!showGallery)}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
+          >
+            {showGallery ? "📁 Cacher la Galerie" : "🖼️ Voir la Galerie Photos"}
+          </button>
+        </div>
+
+        {/* SECTION GALERIE (Conditionnelle) */}
+        {showGallery && (
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 p-5 bg-black/20 rounded-3xl backdrop-blur-sm border border-white/10">
+            {galleryPhotos.length > 0 ? (
+              galleryPhotos.map((photo) => (
+                <div key={photo._id} className="group relative overflow-hidden rounded-xl h-48">
+                  <img 
+                    src={photo.imgPath} 
+                    alt={photo.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  {photo.title && (
+                    <div className="absolute bottom-0 inset-x-0 bg-black/60 p-2 text-xs text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      {photo.title}
+                    </div>
+                  )}
+                </div>
+              ))
+            ) : (
+              <p className="col-span-full text-center py-10 italic text-gray-400">La galerie est vide pour le moment...</p>
+            )}
+          </div>
+        )}
+        
         <div className="mt-32 relative">
           <div className="relative z-50 xl:space-y-32 space-y-10">
             {expCards.map((card) => (

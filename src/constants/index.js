@@ -105,7 +105,7 @@ const techStackImgs = [
   },
   {
     name: "Marketing",
-    imgPath: "images/logos/marketing.png",
+    imgPath: "images/logos/marketing.svg",
   },
   {
     name: "Conseil",
@@ -117,38 +117,7 @@ const techStackImgs = [
   },
 ];
 
-const techStackIcons = [
-  {
-    name: "Formation",
-    modelPath: "/models/react_logo-transformed.glb",
-    scale: 1,
-    rotation: [0, 0, 0],
-  },
-  {
-    name: "Animation",
-    modelPath: "/models/python-transformed.glb",
-    scale: 0.8,
-    rotation: [0, 0, 0],
-  },
-  {
-    name: "Marketing",
-    modelPath: "/models/node-transformed.glb",
-    scale: 5,
-    rotation: [0, -Math.PI / 2, 0],
-  },
-  {
-    name: "Conseil",
-    modelPath: "/models/three.js-transformed.glb",
-    scale: 0.05,
-    rotation: [0, 0, 0],
-  },
-  {
-    name: "Gestion de Projet",
-    modelPath: "/models/git-svg-transformed.glb",
-    scale: 0.05,
-    rotation: [0, -Math.PI / 4, 0],
-  },
-];
+
 /* articles should be fetched from db */
 
 
@@ -199,7 +168,6 @@ export {
   counterItems,
   expLogos,
   socialImgs,
-  techStackIcons,
   techStackImgs,
   navLinks,
 };
